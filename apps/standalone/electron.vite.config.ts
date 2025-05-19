@@ -24,6 +24,7 @@ export default defineConfig({
     }
   },
   renderer: {
+    cacheDir: resolve(__dirname, '../../node_modules/.vite/apps/standalone'),
     resolve: {
       alias: {
         '@renderer': resolve('src/renderer/src')
