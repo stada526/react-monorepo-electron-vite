@@ -6,6 +6,7 @@ import { useState } from 'react'
 function App(): React.JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   const [filePath, setFilePath] = useState<string | null>(null)
+  const [content, setContent] = useState('')
 
   return (
     <>
@@ -43,7 +44,9 @@ function App(): React.JSX.Element {
       <button onClick={async () => {
         const { data } = await window.electron.ipcRenderer.invoke("open-file", filePath)
         console.log(data)
+        setContent(data)
       }}>Load file</button>
+      {content && <div>{content}</div>}
     </>
   )
 }

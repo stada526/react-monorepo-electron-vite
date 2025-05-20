@@ -6,6 +6,13 @@ export function App() {
   return (
     <div>
       <Products />
+      <input type="file" onChange={(e) => {
+        if (!e.target.files) {
+          return
+        }
+        const file = e.target.files[0]
+        console.log(file)
+      }} />
     </div>
   );
 }
