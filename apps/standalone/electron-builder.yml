@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: DEAPViewer
+productName: standalone
 directories:
   buildResources: build
   output: ../../dist/apps/standalone
