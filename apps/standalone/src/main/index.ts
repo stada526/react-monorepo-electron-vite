@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import fs from 'fs'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
@@ -51,7 +52,6 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
-
   createWindow()
 
   app.on('activate', function () {
@@ -72,3 +72,17 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+ipcMain.handle("open-file", async (event, filePath: string) => {
+  // const { canceled, filePaths } = await dialog.showOpenDialog({})
+  // if (canceled) {
+  //   return
+  // }
+  // console.log(filePaths)
+  const data = fs.readFileSync(filePath, { encoding: "utf-8" })
+  console.log(data)
+  console.log("hi")
+  
+  return {
+    data
+  }
+})

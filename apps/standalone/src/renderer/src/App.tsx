@@ -1,9 +1,11 @@
 import Versions from './components/Versions'
 import electronLogo from './assets/electron.svg'
 import { Products } from '@react-monorepo/products'
+import { useState } from 'react'
 
 function App(): React.JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  const [filePath, setFilePath] = useState<string | null>(null)
 
   return (
     <>
@@ -30,6 +32,18 @@ function App(): React.JSX.Element {
       </div>
       <Versions></Versions>
       <Products />
+      <input type="file" onChange={(e) => {
+        if (!e.target.files) {
+          return
+        }
+        const file = e.target.files[0]
+        setFilePath(file.path)
+      }} />
+      {filePath && <div>{filePath}</div>}
+      <button onClick={async () => {
+        const { data } = await window.electron.ipcRenderer.invoke("open-file", filePath)
+        console.log(data)
+      }}>Load file</button>
     </>
   )
 }
