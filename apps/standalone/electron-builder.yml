@@ -2,6 +2,7 @@ appId: com.electron.app
 productName: DEAPViewer
 directories:
   buildResources: build
+  output: ../../dist/apps/standalone
 files:
   - "!**/.vscode/*"
   - "!src/*"
