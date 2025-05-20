@@ -18,7 +18,7 @@
         "serve": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "npx electron-vite dev --config apps/standalone/electron.vite.config.ts --entry out/main/index.js"
+                "command": "npx electron-vite dev --config apps/standalone/electron.vite.config.ts --entry apps/standalone/out/main/index.js"
             }
         }
     }
